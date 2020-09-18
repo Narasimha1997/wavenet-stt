@@ -1,0 +1,20 @@
+{
+    "configurations": [
+        {
+            "name": "Linux",
+            "includePath": [
+                "${workspaceFolder}/**",
+                "/home/narasimha/Documents/installation/tensorflow/include",
+                "/home/narasimha/Documents/installation/tensorflow/include/src",
+                "/home/narasimha/.local/lib/python3.6/site-packages/pybind11/include",
+                "/usr/include/python3.6m"
+            ],
+            "defines": [],
+            "compilerPath": "/usr/bin/gcc",
+            "cStandard": "gnu11",
+            "cppStandard": "gnu++14",
+            "intelliSenseMode": "clang-x64"
+        }
+    ],
+    "version": 4
+}
