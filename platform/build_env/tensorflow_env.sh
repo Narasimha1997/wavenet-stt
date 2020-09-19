@@ -21,7 +21,7 @@ fi
 if [[ $1 == "python" ]]; then
     PYTHON_EXT_SUFFIX=$(python3-config --extension-suffix)
     PYTHON_PYBIND_INCLUDES=$(python3 -m pybind11 --includes)
-    g++ ${SST_SOURCE_DIR}/python/python_wrapper.cc ${SST_SOURCE_DIR}/inference.cc \
+    g++ ${SST_SOURCE_DIR}/python/python_wrapper.cc ${SST_SOURCE_DIR}/inference.cc  \
         -fPIC -shared \
         -I${SST_INCLUDE_PATH} -I${TENSORFLOW_CC_INCLUDE_PATH} \
         -I${TENSORFLOW_CC_INCLUDE_PATH}/src \
@@ -34,7 +34,7 @@ if [[ $1 == "python" ]]; then
 fi 
 
 #start compiling
-g++ ../cc/main.cc ${SST_SOURCE_DIR}/inference.cc \
+g++ ../cc/main.cc ${SST_SOURCE_DIR}/inference.cc  \
     -I${SST_INCLUDE_PATH} -I${TENSORFLOW_CC_INCLUDE_PATH} \
     -I${TENSORFLOW_CC_INCLUDE_PATH}/src \
     -L${TENSORFLOW_CC_LIBS_PATH} \

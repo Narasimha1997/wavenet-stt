@@ -6,8 +6,10 @@
 #include <vector>
 #include <sys/stat.h>
 
+
 #include "tensorflow/core/public/session.h"
 #include "tensorflow/core/platform/env.h"
+
 
 class InferenceCore {
 
@@ -24,7 +26,7 @@ class InferenceCore {
     InferenceCore(bool storeNames);
     void LoadWavenet(std::string modelPath);
     std::vector<std::string> * GetOpNames();
-    void Infer(void * mfcc, int seq_length, int n_channels);
+    std::vector<std::string> Infer(const float * mfcc, int seq_length, int n_channels);
 };
 
 #endif

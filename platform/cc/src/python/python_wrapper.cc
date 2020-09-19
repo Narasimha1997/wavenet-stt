@@ -1,5 +1,6 @@
 #include "pybind11/pybind11.h"
 #include "pybind11/numpy.h"
+#include "pybind11/stl.h"
 
 #include "inference.h"
 
@@ -24,13 +25,10 @@ class PyWrap__Wavenet {
             return this->inferCore->GetOpNames();
         }
 
-        void PyWrap__Infer(python::array_t<float>& mfcc, int seq_length, int n_channels) {
+        std::vector<std::string> PyWrap__Infer(python::array_t<float>& mfcc, int seq_length, int n_channels) {
             const float * mfcc_float = np_to_float_32(mfcc);
-
-            //sample test code
-            for(int i = 0; i < seq_length * n_channels; i++) {
-                std::cout<<mfcc_float[i]<<" ";
-            }
+            std::vector<std::string> outputs = this->inferCore->Infer(mfcc_float, seq_length, n_channels);
+            return outputs;
         }
 };
 

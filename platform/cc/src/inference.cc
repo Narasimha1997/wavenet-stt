@@ -1,6 +1,19 @@
 #include <inference.h>
 
 
+static inline std::string index_to_character(long * index_map, int& length) {
+    std::string english = " abcdefghijklmnopqrstuvwxyz";
+    std::string speechData;
+    for(int i = 0; i < length; i++) {
+        speechData.push_back(
+            english.at(*(index_map + i))
+        );
+    }
+
+    return speechData;
+}
+
+
 void InferenceCore::logError(tensorflow::Status * status) {
     if(status) {
         std::cout<<"Error["<<status->code() <<"] " << status->ToString() << std::endl;
@@ -72,11 +85,51 @@ std::vector<std::string> * InferenceCore::GetOpNames() {
     return &this->node_names;
 }
 
-void InferenceCore::Infer(void * mfcc, int seq_length, int n_channels) {
+std::vector<std::string> InferenceCore::Infer(const float * mfcc, int seq_length, int n_channels) {
     tensorflow::TensorShape mfcc_shape({1, seq_length, n_channels});
-    tensorflow::TensorShape seq_length_shape({1, seq_length});
+    tensorflow::TensorShape seq_length_shape({1});
 
-    //tensorflow::Tensor mfcc(tensorflow::DT_FLOAT, mfcc_shape);
-    //tensorflow::Tensor seq_length(tensorflow::DT_FLOAT, seq_length_shape);
+    tensorflow::Tensor mfcc_tensor(tensorflow::DT_FLOAT, mfcc_shape);
+    tensorflow::Tensor seq_length_tensor(tensorflow::DT_INT32, seq_length_shape);
+
+    //create a output tensor:
+    std::vector<tensorflow::Tensor> outputTensor;
+
+    //TODO: Try to cast tensor without copy, more efficient way required
+    memcpy(mfcc_tensor.data(), mfcc, seq_length * n_channels * sizeof(float));
+    seq_length_tensor.vec<int>()(0) = seq_length;
+
+    tensorflow::Status inferenceStatus = this->wavenet_session->Run(
+       {{"mfcc:0", mfcc_tensor}, {"sequence_length:0", seq_length_tensor}},
+       {{"output:0"}},
+       {},
+       &outputTensor
+    );
+
+    if (!inferenceStatus.ok()) {
+        std::cout<<"Inference failed"<<std::endl;
+        logError(&inferenceStatus);
+        exit(0);
+    }
+
+    //postporcess beam search outputs to labels :
+    std::vector<std::string> speechOutput;
+    for(tensorflow::Tensor tensor : outputTensor) {
+        //iterate the tensor and map outputs:
+        tensorflow::TensorShape shape = tensor.shape();
+        int n_rows = shape.dim_size(0);
+        int sentenceLength = shape.dim_size(1);
+        
+        long * int_indexes = (long *)tensor.data();
+
+        for(int i = 0; i < n_rows; i++) {
+            speechOutput.push_back(
+                index_to_character(int_indexes, sentenceLength)
+            );
+            int_indexes += sentenceLength;
+        }
+    }
+
+    return speechOutput;
 }
 
