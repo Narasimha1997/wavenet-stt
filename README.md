@@ -71,7 +71,7 @@ print(result)
 ##### TODO and Roadmap:
 1. Build static library to avoid dynamic linking with `libtensorflow_cc`
 2. We are using `librosa` for MFCC, the goal is to use custom C++ implementation.
-3. Use custom C++ `ctc_beam_search_decoder` becuase it is not supported in tensorflow lite.
+3. Use custom C++ `ctc_beam_search_decoder` because it is not supported in tensorflow lite.
 4. Provide a Dockerfile
 5. Impelement Tensorflow Lite implementation for embedded devices and android.
 6. Add Tensorflow.js support.
