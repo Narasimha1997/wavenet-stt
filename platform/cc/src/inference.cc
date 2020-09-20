@@ -1,8 +1,8 @@
 #include <inference.h>
 
+static std::string english = " abcdefghijklmnopqrstuvwxyz";
 
 static inline std::string index_to_character(long * index_map, int& length) {
-    std::string english = " abcdefghijklmnopqrstuvwxyz";
     std::string speechData;
     for(int i = 0; i < length; i++) {
         speechData.push_back(

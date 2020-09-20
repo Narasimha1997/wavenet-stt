@@ -1,0 +1,2 @@
+glog
+librosa==0.4.1

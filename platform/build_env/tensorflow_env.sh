@@ -9,6 +9,7 @@ LIB_PYTHON_PATH=
 present_dir=$(pwd)
 SST_SOURCE_DIR=${present_dir}/../cc/src 
 SST_INCLUDE_PATH=${present_dir}/../cc/include
+SST_PYTHON_PATH=${present_dir}/../wavenetsst/wavenetpy
 
 export LD_LIBRARY_PATH=${LD_LIBRARY_PATH}:${TENSORFLOW_CC_LIBS_PATH}
 
@@ -30,7 +31,26 @@ if [[ $1 == "python" ]]; then
         -Wall -Wextra \
         ${PYTHON_PYBIND_INCLUDES} \
         -o wavenetsst${PYTHON_EXT_SUFFIX}
-        exit
+    
+    #export wavenetsst to python module path
+    cp wavenetsst${PYTHON_EXT_SUFFIX} ../wavenetsst/wavenetpy
+    exit
+fi 
+
+if [[ $1 == "python_static" ]]; then
+    PYTHON_EXT_SUFFIX=$(python3-config --extension-suffix)
+    PYTHON_PYBIND_INCLUDES=$(python3 -m pybind11 --includes)
+    g++ ${SST_SOURCE_DIR}/python/python_wrapper.cc ${SST_SOURCE_DIR}/inference.cc  \
+        -I${SST_INCLUDE_PATH} -I${TENSORFLOW_CC_INCLUDE_PATH} \
+        -I${TENSORFLOW_CC_INCLUDE_PATH}/src \
+        -L${TENSORFLOW_CC_LIBS_PATH} \
+        -ltensorflow_cc -lpthread -lprotobuf -lpython3.6m  \
+        ${PYTHON_PYBIND_INCLUDES} \
+        -Wl,--whole-archive -fPIC -shared  \
+        -o wavenetsst${PYTHON_EXT_SUFFIX}
+    
+    #export wavenetsst to python module path
+    exit
 fi 
 
 #start compiling
