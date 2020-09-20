@@ -1,5 +1,5 @@
 #### Wavenet Core module
-This package deals with core wavenet speech-to-text functionalities like model export and AI level operations and has nothing do with model deployment or engineering.
+This package deals with core wavenet speech-to-text functionalities like model export and AI level operations and has nothing to do with model deployment or engineering.
 
 You can edit this package to modify the graph operations or add your own op.
 The definition of the wavenet model for speech-to-text is provided in `modules/wavenet.py`

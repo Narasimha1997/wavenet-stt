@@ -73,7 +73,7 @@ print(result)
 2. We are using `librosa` for MFCC, the goal is to use custom C++ implementation.
 3. Use custom C++ `ctc_beam_search_decoder` because it is not supported in tensorflow lite.
 4. Provide a Dockerfile
-5. Impelement Tensorflow Lite implementation for embedded devices and android.
+5. Implement Tensorflow Lite implementation for embedded devices and android.
 6. Add Tensorflow.js support.
 7. Optimize C++ code.
 8. Provide CI/CD pipeline for C++ build. 
