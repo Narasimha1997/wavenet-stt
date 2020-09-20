@@ -80,10 +80,10 @@ print(result)
 
 ##### Contributor guide
 We welcome contributors especially beginners. Contributors can :
-    1. Raise issues
-    2. Suggest features
-    3. Fix issues and bugs
-    4. Impelement features specified in TODO and Roadmap.
+1. Raise issues
+2. Suggest features
+3. Fix issues and bugs
+4. Impelement features specified in TODO and Roadmap.
 
 ##### Acknowledgements
 1. Deepmind
