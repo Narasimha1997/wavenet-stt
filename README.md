@@ -23,7 +23,7 @@ TO build C++ api, you have to build tensorflow from scratch along with its depen
 ##### Build the wavenet module
 1. Install `pybind11` and python headers.
     ```
-    sudo apt install python3-dev
+    sudo apt install python3-dev &&
     pip3 install pybind11
     ```
 2. Go to `platform/buld_env`
