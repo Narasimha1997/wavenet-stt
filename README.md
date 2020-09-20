@@ -1,4 +1,4 @@
-### SST-Wavenet
+### STT-Wavenet
 Python and C++ impelementation of end-to-end sentence level Speech Recognition using DeepMind's recent research on audio processing and synthesis. This is based on [WaveNet: A Generative Model for Raw Audio](https://arxiv.org/pdf/1609.03499.pdf) where DeepMind proposed a neural network architecture that could generate human-like audio from text, the model is also capable of performing speech-to-text. This repo provides speech-to-text implementation of Wavenet. The model takes Mel-spectograph as input and produces text as output using wavenet + beam search decoder.
 
 ![Wavenet STT](./images/architecture.png)
