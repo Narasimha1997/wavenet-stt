@@ -1,5 +1,5 @@
 ### STT-Wavenet
-Python and C++ impelementation of end-to-end sentence level Speech Recognition using DeepMind's recent research on audio processing and synthesis. This is based on [WaveNet: A Generative Model for Raw Audio](https://arxiv.org/pdf/1609.03499.pdf) where DeepMind proposed a neural network architecture that could generate human-like audio from text, the model is also capable of performing speech-to-text. This repo provides speech-to-text implementation of Wavenet. The model takes Mel-spectograph as input and produces text as output using wavenet + beam search decoder.
+Python and C++ implementation of end-to-end sentence level Speech Recognition using DeepMind's recent research on audio processing and synthesis. This is based on [WaveNet: A Generative Model for Raw Audio](https://arxiv.org/pdf/1609.03499.pdf) where DeepMind proposed a neural network architecture that could generate human-like audio from text, the model is also capable of performing speech-to-text. This repo provides speech-to-text implementation of Wavenet. The model takes Mel-spectograph as input and produces text as output using wavenet + beam search decoder.
 
 ![Wavenet STT](./images/architecture.png)
 
@@ -71,7 +71,7 @@ print(result)
 ##### TODO and Roadmap:
 1. Build static library to avoid dynamic linking with `libtensorflow_cc`
 2. We are using `librosa` for MFCC, the goal is to use custom C++ implementation.
-3. Use custom C++ `ctc_beam_search_decoder` becuase it is not supported in tensorflow lite.
+3. Use custom C++ `ctc_beam_search_decoder` because it is not supported in tensorflow lite.
 4. Provide a Dockerfile
 5. Impelement Tensorflow Lite implementation for embedded devices and android.
 6. Add Tensorflow.js support.
