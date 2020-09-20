@@ -1,4 +1,4 @@
-tensorflow==1.14.0
+tensorflow==1.15.2
 glog
 librosa==0.4.1
 pybind11
