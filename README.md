@@ -88,4 +88,5 @@ We welcome contributors especially beginners. Contributors can :
 ##### Acknowledgements
 1. Deepmind
 2. [buriburisuri](https://github.com/buriburisuri/speech-to-text-wavenet) for providing the pretrained ckpt files and `wavenet.py`.
+3. [kingscraft](https://github.com/kingstarcraft/speech-to-text-wavenet2) for tensorflow reference implementation.
 3. Stackoverflow and Tensorflow Docs
